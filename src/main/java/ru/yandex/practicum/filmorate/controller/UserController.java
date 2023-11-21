@@ -17,23 +17,23 @@ public class UserController {
     private Map<Integer, User> users = new HashMap<>();
 
     @GetMapping("/users")
-    public List<User> showAllUsers(){
+    public List<User> showAllUsers() {
         return new ArrayList<>(users.values());
     }
 
     @PostMapping("/user")
-    public User createUser(@RequestBody User user){
+    public User createUser(@RequestBody User user) {
         log.info("Получен запрос POST /user.");
         UserValidation.validate(user);
-        users.put(user.getId(),user);
+        users.put(user.getId(), user);
         return user;
     }
 
     @PutMapping("/user")
-    public User updateUser(@RequestBody User user){
+    public User updateUser(@RequestBody User user) {
         log.info("Получен запрос PUT /user.");
         UserValidation.validate(user);
-        users.put(user.getId(),user);
+        users.put(user.getId(), user);
         return user;
     }
 }

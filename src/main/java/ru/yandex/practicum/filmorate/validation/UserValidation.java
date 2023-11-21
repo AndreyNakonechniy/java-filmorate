@@ -9,19 +9,19 @@ import java.time.LocalDate;
 @Slf4j
 public class UserValidation {
 
-    public static void validate(User user){
-        if (user.getEmail().isEmpty() || !user.getEmail().contains("@")){
+    public static void validate(User user) {
+        if (user.getEmail().isEmpty() || !user.getEmail().contains("@")) {
             log.info("Валидация не пройдена");
             throw new ValidationException("Почта должна содержать символ \"@\" и не быть пустым");
         }
-        if(user.getLogin().isEmpty() || user.getLogin().contains(" ")){
+        if (user.getLogin().isEmpty() || user.getLogin().contains(" ")) {
             log.info("Валидация не пройдена");
             throw new ValidationException("Логин не может быть пустым и не должен содержать пробелы");
         }
-        if (user.getName().isEmpty()){
+        if (user.getName().isEmpty()) {
             user.setName(user.getLogin());
         }
-        if (user.getBirthday().isAfter(LocalDate.now())){
+        if (user.getBirthday().isAfter(LocalDate.now())) {
             log.info("Валидация не пройдена");
             throw new ValidationException("Дата рождения не может быть в будущем");
         }

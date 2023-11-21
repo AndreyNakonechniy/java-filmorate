@@ -22,17 +22,17 @@ class UserValidationTest {
 
     @BeforeEach
     void setUp() {
-        user = new User(1,"email@email","login","name", LocalDate.of(2000,7,30));
-        userWithoutName = new User(1,"email@email","login","", LocalDate.of(2000,7,30));
-        userWithWrongEmail = new User(1,"emailemail","login","name", LocalDate.of(2000,7,30));
-        userWithEmptyEmail = new User(1,"","login","name", LocalDate.of(2000,7,30));
-        userWithWrongLogin = new User(1,"email@email","log in","name", LocalDate.of(2000,7,30));
-        userWithEmptyLogin = new User(1,"email@email","","name", LocalDate.of(2000,7,30));
-        userWithWrongDate = new User(1,"email@email","login","name", LocalDate.of(2077,7,30));
+        user = new User(1, "email@email", "login", "name", LocalDate.of(2000, 7, 30));
+        userWithoutName = new User(1, "email@email", "login", "", LocalDate.of(2000, 7, 30));
+        userWithWrongEmail = new User(1, "emailemail", "login", "name", LocalDate.of(2000, 7, 30));
+        userWithEmptyEmail = new User(1, "", "login", "name", LocalDate.of(2000, 7, 30));
+        userWithWrongLogin = new User(1, "email@email", "log in", "name", LocalDate.of(2000, 7, 30));
+        userWithEmptyLogin = new User(1, "email@email", "", "name", LocalDate.of(2000, 7, 30));
+        userWithWrongDate = new User(1, "email@email", "login", "name", LocalDate.of(2077, 7, 30));
     }
 
     @Test
-    void userValidation(){
+    void userValidation() {
         Assertions.assertDoesNotThrow(() -> UserValidation.validate(user));
         Assertions.assertDoesNotThrow(() -> UserValidation.validate(userWithoutName));
 
