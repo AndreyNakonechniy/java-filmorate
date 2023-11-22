@@ -36,7 +36,7 @@ public class FilmController {
     public Film updateFilm(@RequestBody Film film) {
         log.info("Получен запрос PUT /films.");
         FilmValidation.validate(film);
-        if (!films.containsKey(film.getId())){
+        if (!films.containsKey(film.getId())) {
             throw new ValidationException();
         }
         films.put(film.getId(), film);

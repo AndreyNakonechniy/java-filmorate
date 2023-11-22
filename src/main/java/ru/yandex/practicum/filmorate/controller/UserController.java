@@ -37,7 +37,7 @@ public class UserController {
     public User updateUser(@RequestBody User user) {
         log.info("Получен запрос PUT /users.");
         UserValidation.validate(user);
-        if (!users.containsKey(user.getId())){
+        if (!users.containsKey(user.getId())) {
             throw new ValidationException();
         }
         users.put(user.getId(), user);
