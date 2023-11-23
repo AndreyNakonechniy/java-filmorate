@@ -15,8 +15,8 @@ import java.util.Map;
 @Slf4j
 public class UserController {
 
-    private Map<Integer, User> users = new HashMap<>();
-    private int id = 1;
+    private final Map<Long, User> users = new HashMap<>();
+    private long id = 1L;
 
     @GetMapping("/users")
     public List<User> showAllUsers() {
@@ -25,17 +25,16 @@ public class UserController {
 
     @PostMapping("/users")
     public User createUser(@RequestBody User user) {
-        log.info("Получен запрос POST /users.");
+        log.info("Creating user {}", user);
         UserValidation.validate(user);
-        user.setId(id);
-        id++;
+        user.setId(id++);
         users.put(user.getId(), user);
         return user;
     }
 
     @PutMapping("/users")
     public User updateUser(@RequestBody User user) {
-        log.info("Получен запрос PUT /users.");
+        log.info("Updating user {}", user);
         UserValidation.validate(user);
         if (!users.containsKey(user.getId())) {
             throw new ValidationException();

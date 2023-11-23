@@ -14,8 +14,8 @@ import java.util.Map;
 @RestController
 @Slf4j
 public class FilmController {
-    private Map<Integer, Film> films = new HashMap<>();
-    private int id = 1;
+    private final Map<Long, Film> films = new HashMap<>();
+    private long id = 1L;
 
     @GetMapping("/films")
     public List<Film> showAllFilms() {
@@ -24,17 +24,16 @@ public class FilmController {
 
     @PostMapping("/films")
     public Film createFilm(@RequestBody Film film) {
-        log.info("Получен запрос POST /films.");
+        log.info("Creating film {}", film);
         FilmValidation.validate(film);
-        film.setId(id);
-        id++;
+        film.setId(id++);
         films.put(film.getId(), film);
         return film;
     }
 
     @PutMapping("/films")
     public Film updateFilm(@RequestBody Film film) {
-        log.info("Получен запрос PUT /films.");
+        log.info("Updating film {}", film);
         FilmValidation.validate(film);
         if (!films.containsKey(film.getId())) {
             throw new ValidationException();
