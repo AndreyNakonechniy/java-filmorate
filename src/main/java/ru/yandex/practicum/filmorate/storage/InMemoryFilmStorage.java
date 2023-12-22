@@ -14,7 +14,7 @@ public class InMemoryFilmStorage implements FilmStorage {
 
     private final UserStorage userStorage;
 
-    private final static int DEFAULT_VALUE_FOR_POPULAR_FILMS = 10;
+    private static final int DEFAULT_VALUE_FOR_POPULAR_FILMS = 10;
 
     public InMemoryFilmStorage(UserStorage userStorage) {
         this.userStorage = userStorage;
