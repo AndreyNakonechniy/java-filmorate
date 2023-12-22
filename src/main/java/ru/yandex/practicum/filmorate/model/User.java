@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -13,6 +15,6 @@ public class User {
     private String login;
     private String name;
     private LocalDate birthday;
-
+    private Set<Long> friendsId;
 
 }
