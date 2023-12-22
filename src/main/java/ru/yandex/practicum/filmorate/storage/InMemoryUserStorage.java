@@ -54,10 +54,10 @@ public class InMemoryUserStorage implements UserStorage {
         if (id == friendId) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Нельзя добавить себя в друзья");
         }
-        if (users.get(id).getFriendsId() == null){
+        if (users.get(id).getFriendsId() == null) {
             users.get(id).setFriendsId(new HashSet<>());
         }
-        if (users.get(friendId).getFriendsId() == null){
+        if (users.get(friendId).getFriendsId() == null) {
             users.get(friendId).setFriendsId(new HashSet<>());
         }
         users.get(id).getFriendsId().add(friendId);

@@ -8,7 +8,6 @@ import ru.yandex.practicum.filmorate.storage.UserStorage;
 import ru.yandex.practicum.filmorate.validation.UserValidation;
 
 import java.util.List;
-import java.util.Set;
 
 @Slf4j
 @Service
