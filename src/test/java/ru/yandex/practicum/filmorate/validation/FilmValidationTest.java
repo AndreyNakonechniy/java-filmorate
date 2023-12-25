@@ -8,6 +8,7 @@ import ru.yandex.practicum.filmorate.model.Film;
 
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,11 +31,11 @@ class FilmValidationTest {
 
     @BeforeEach
     void setUp() {
-        film = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1985, 7, 3), 116);
-        filmWithWrongDate = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1717, 7, 3), 116);
-        filmWithWrongName = new Film(1, "", "filmDescription", LocalDate.of(1985, 7, 3), 116);
-        filmWithWrongDescription = new Film(1, "BackToTheFuture", longString, LocalDate.of(1985, 7, 3), 116);
-        filmWithWrongDuration = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1985, 7, 3), 0);
+        film = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1985, 7, 3), 116, new HashSet<>());
+        filmWithWrongDate = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1717, 7, 3), 116, new HashSet<>());
+        filmWithWrongName = new Film(1, "", "filmDescription", LocalDate.of(1985, 7, 3), 116, new HashSet<>());
+        filmWithWrongDescription = new Film(1, "BackToTheFuture", longString, LocalDate.of(1985, 7, 3), 116, new HashSet<>());
+        filmWithWrongDuration = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1985, 7, 3), 0, new HashSet<>());
 
     }
 
