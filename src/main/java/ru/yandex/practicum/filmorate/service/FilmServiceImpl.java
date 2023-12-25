@@ -1,19 +1,25 @@
 package ru.yandex.practicum.filmorate.service;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.yandex.practicum.filmorate.exception.IncorrectDataException;
+import ru.yandex.practicum.filmorate.exception.NotFoundException;
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.storage.FilmStorage;
+import ru.yandex.practicum.filmorate.storage.InMemoryFilmStorage;
+import ru.yandex.practicum.filmorate.storage.UserStorage;
 import ru.yandex.practicum.filmorate.validation.FilmValidation;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
-@AllArgsConstructor
-@Slf4j
+@RequiredArgsConstructor
 public class FilmServiceImpl implements FilmService {
-    private FilmStorage filmStorage;
+    private final InMemoryFilmStorage filmStorage;
+    private final UserStorage userStorage;
 
     @Override
     public List<Film> showAllFilms() {
@@ -23,38 +29,63 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public Film createFilm(Film film) {
         FilmValidation.validate(film);
-        log.info("Creating film {}", film);
         return filmStorage.createFilm(film);
     }
 
     @Override
     public Film updateFilm(Film film) {
         FilmValidation.validate(film);
-        log.info("Updating film {}", film);
         return filmStorage.updateFilm(film);
     }
 
     @Override
     public Film getFilmById(long id) {
-        log.info("Getting film by id {}", id);
-        return filmStorage.getFilmById(id);
+        if (!getFilmStorageMap().containsKey(id)) {
+            throw new NotFoundException("Фильм не найден");
+        }
+        return getFilmStorageMap().get(id);
     }
 
     @Override
     public Film addLike(long id, long userId) {
-        log.info("Adding like {}", id);
-        return filmStorage.addLike(id, userId);
+        if (!getFilmStorageMap().containsKey(id)) {
+            throw new NotFoundException("Фильм не найден");
+        }
+        if (userStorage.checkId(userId)) {
+            getFilmStorageMap().get(id).getLikes().add(userId);
+        }
+        return getFilmStorageMap().get(id);
     }
 
     @Override
     public Film deleteLike(long id, long userId) {
-        log.info("Deleting like {}", id);
-        return filmStorage.deleteLike(id, userId);
+        if (!getFilmStorageMap().containsKey(id)) {
+            throw new NotFoundException("Фильм не найден");
+        }
+        if (userStorage.checkId(userId)) {
+            getFilmStorageMap().get(id).getLikes().remove(userId);
+        }
+        return getFilmStorageMap().get(id);
     }
 
     @Override
-    public List<Film> getPopularFilms(String count) {
-        log.info("Getting popular films");
-        return filmStorage.getPopularFilms(count);
+    public List<Film> getPopularFilms(int count) {
+        List<Film> collect = getFilmStorageMap().values().stream()
+                .sorted(Comparator.reverseOrder())
+                .collect(toList());
+
+        if (count <= 0) {
+            throw new IncorrectDataException("Параметр count должен быть больше 0");
+        }
+
+        if (collect.size() > count) {
+            return collect.subList(0, count);
+        }
+
+        return collect;
+    }
+
+    private Map<Long, Film> getFilmStorageMap() {
+        return filmStorage.getFilmMap();
     }
 }
