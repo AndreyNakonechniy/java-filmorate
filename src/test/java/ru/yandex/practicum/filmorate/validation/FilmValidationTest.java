@@ -31,11 +31,11 @@ class FilmValidationTest {
 
     @BeforeEach
     void setUp() {
-        film = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1985, 7, 3), 116, new HashSet<>());
-        filmWithWrongDate = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1717, 7, 3), 116, new HashSet<>());
-        filmWithWrongName = new Film(1, "", "filmDescription", LocalDate.of(1985, 7, 3), 116, new HashSet<>());
-        filmWithWrongDescription = new Film(1, "BackToTheFuture", longString, LocalDate.of(1985, 7, 3), 116, new HashSet<>());
-        filmWithWrongDuration = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1985, 7, 3), 0, new HashSet<>());
+        film = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1985, 7, 3), 116, 1);
+        filmWithWrongDate = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1717, 7, 3), 116, 1);
+        filmWithWrongName = new Film(1, "", "filmDescription", LocalDate.of(1985, 7, 3), 116,1);
+        filmWithWrongDescription = new Film(1, "BackToTheFuture", longString, LocalDate.of(1985, 7, 3), 116, 1);
+        filmWithWrongDuration = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1985, 7, 3), 0, 1);
 
     }
 
