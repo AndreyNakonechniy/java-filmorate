@@ -1,12 +1,10 @@
 package ru.yandex.practicum.filmorate.storage;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exception.NotFoundException;
-import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.User;
 
 import java.util.List;
@@ -95,7 +93,7 @@ public class UserDbStorage implements UserStorage {
             throw new NotFoundException("Пользователь не найден");
         }
 
-        jdbcTemplate.update("delete from friend where user_id = ? and friend_id = ?", id,friendId);
+        jdbcTemplate.update("delete from friend where user_id = ? and friend_id = ?", id, friendId);
         return getUserById(id);
     }
 
@@ -106,8 +104,8 @@ public class UserDbStorage implements UserStorage {
         if (!existUser) {
             throw new NotFoundException("Пользователь не найден");
         }
-       return jdbcTemplate.query("select * from users where user_id in " +
-                "(select friend_id from friend where user_id = ?)",(rs, rowNum) -> new User(rs.getInt("user_id"),
+        return jdbcTemplate.query("select * from users where user_id in " +
+                "(select friend_id from friend where user_id = ?)", (rs, rowNum) -> new User(rs.getInt("user_id"),
                 rs.getString("email"), rs.getString("login"),
                 rs.getString("name"), rs.getDate("birthday").toLocalDate()), id);
     }
@@ -127,13 +125,9 @@ public class UserDbStorage implements UserStorage {
 
         return jdbcTemplate.query("select * from users where user_id in " +
                 "(select friend_id from friend where user_id = ?) and user_id in" +
-                "(select friend_id from friend where user_id = ?)",(rs, rowNum) -> new User(rs.getInt("user_id"),
+                "(select friend_id from friend where user_id = ?)", (rs, rowNum) -> new User(rs.getInt("user_id"),
                 rs.getString("email"), rs.getString("login"),
-                rs.getString("name"), rs.getDate("birthday").toLocalDate()), id,otherId);
+                rs.getString("name"), rs.getDate("birthday").toLocalDate()), id, otherId);
     }
 
-//    @Override
-//    public boolean checkId(long userId) {
-//        return false;
-//    }
 }

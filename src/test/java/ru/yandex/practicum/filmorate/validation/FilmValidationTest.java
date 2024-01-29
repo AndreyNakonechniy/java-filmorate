@@ -5,10 +5,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.model.Mpa;
 
 
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,11 +32,11 @@ class FilmValidationTest {
 
     @BeforeEach
     void setUp() {
-        film = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1985, 7, 3), 116, 1);
-        filmWithWrongDate = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1717, 7, 3), 116, 1);
-        filmWithWrongName = new Film(1, "", "filmDescription", LocalDate.of(1985, 7, 3), 116,1);
-        filmWithWrongDescription = new Film(1, "BackToTheFuture", longString, LocalDate.of(1985, 7, 3), 116, 1);
-        filmWithWrongDuration = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1985, 7, 3), 0, 1);
+        film = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1985, 7, 3), 116, new Mpa(1, "1"), new ArrayList<>());
+        filmWithWrongDate = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1717, 7, 3), 116, new Mpa(1, "1"), new ArrayList<>());
+        filmWithWrongName = new Film(1, "", "filmDescription", LocalDate.of(1985, 7, 3), 116, new Mpa(1, "1"), new ArrayList<>());
+        filmWithWrongDescription = new Film(1, "BackToTheFuture", longString, LocalDate.of(1985, 7, 3), 116, new Mpa(1, "1"), new ArrayList<>());
+        filmWithWrongDuration = new Film(1, "BackToTheFuture", "filmDescription", LocalDate.of(1985, 7, 3), 0, new Mpa(1, "1"), new ArrayList<>());
 
     }
 

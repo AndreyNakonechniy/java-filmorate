@@ -9,8 +9,9 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class MpaServiceIml implements MpaService{
+public class MpaServiceIml implements MpaService {
     private final MpaStorage mpaStorage;
+
     @Override
     public List<Mpa> getAllMpa() {
         return mpaStorage.getAllMpa();

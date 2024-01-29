@@ -20,5 +20,5 @@ public interface UserStorage {
     public List<User> getFriends(long id);
 
     public List<User> getCommonFriends(long id, long otherId);
-//    public boolean checkId(long userId);
+
 }

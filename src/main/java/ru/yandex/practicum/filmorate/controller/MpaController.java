@@ -17,12 +17,12 @@ public class MpaController {
     private final MpaService mpaService;
 
     @GetMapping("/mpa")
-    public List<Mpa> getAllMpa(){
+    public List<Mpa> getAllMpa() {
         return mpaService.getAllMpa();
     }
 
     @GetMapping("/mpa/{id}")
-    public Mpa getMpaById(@PathVariable int id){
+    public Mpa getMpaById(@PathVariable int id) {
         log.info("Getting mpa by id {}", id);
         return mpaService.getMpaById(id);
     }

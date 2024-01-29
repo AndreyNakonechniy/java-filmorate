@@ -7,7 +7,6 @@ import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,13 +22,13 @@ class UserValidationTest {
 
     @BeforeEach
     void setUp() {
-        user = new User(1, "email@email", "login", "name", LocalDate.of(2000, 7, 30), new HashSet<>());
-        userWithoutName = new User(1, "email@email", "login", "", LocalDate.of(2000, 7, 30), new HashSet<>());
-        userWithWrongEmail = new User(1, "emailemail", "login", "name", LocalDate.of(2000, 7, 30), new HashSet<>());
-        userWithEmptyEmail = new User(1, "", "login", "name", LocalDate.of(2000, 7, 30), new HashSet<>());
-        userWithWrongLogin = new User(1, "email@email", "log in", "name", LocalDate.of(2000, 7, 30), new HashSet<>());
-        userWithEmptyLogin = new User(1, "email@email", "", "name", LocalDate.of(2000, 7, 30), new HashSet<>());
-        userWithWrongDate = new User(1, "email@email", "login", "name", LocalDate.of(2077, 7, 30), new HashSet<>());
+        user = new User(1, "email@email", "login", "name", LocalDate.of(2000, 7, 30));
+        userWithoutName = new User(1, "email@email", "login", "", LocalDate.of(2000, 7, 30));
+        userWithWrongEmail = new User(1, "emailemail", "login", "name", LocalDate.of(2000, 7, 30));
+        userWithEmptyEmail = new User(1, "", "login", "name", LocalDate.of(2000, 7, 30));
+        userWithWrongLogin = new User(1, "email@email", "log in", "name", LocalDate.of(2000, 7, 30));
+        userWithEmptyLogin = new User(1, "email@email", "", "name", LocalDate.of(2000, 7, 30));
+        userWithWrongDate = new User(1, "email@email", "login", "name", LocalDate.of(2077, 7, 30));
     }
 
     @Test

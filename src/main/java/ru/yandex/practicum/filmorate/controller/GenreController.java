@@ -16,13 +16,13 @@ import java.util.List;
 public class GenreController {
     private final GenreService genreService;
 
-    @GetMapping("/genre")
-    public List<Genre> getAllGenres(){
+    @GetMapping("/genres")
+    public List<Genre> getAllGenres() {
         return genreService.getAllGenres();
     }
 
-    @GetMapping("/genre/{id}")
-    public Genre getGenreById(@PathVariable int id){
+    @GetMapping("/genres/{id}")
+    public Genre getGenreById(@PathVariable int id) {
         log.info("Getting Genre by id {}", id);
         return genreService.getGenreById(id);
     }
