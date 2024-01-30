@@ -12,4 +12,12 @@ public interface FilmStorage {
 
     public Film updateFilm(Film film);
 
+    public Film getFilmById(long id);
+
+    public Film addLike(long id, long userId);
+
+    public Film deleteLike(long id, long userId);
+
+    public List<Film> getPopularFilms(int count);
+
 }
